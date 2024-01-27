@@ -2,7 +2,7 @@ import React from "react";
 
 function Context() {
   return (
-    <div className="text-white flex flex-col gap-1 items-center text-sm pb-4">
+    <div className="text-white flex flex-col gap-1 items-center text-sm py-4">
       <p>Filled Context Window</p>
       <div className="flex gap-2 items-center">
         <span>30</span>

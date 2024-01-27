@@ -3,7 +3,7 @@ import CategoryButton from "../CategoryButton/CategoryButton";
 
 function NavBar() {
   return (
-    <header className="py-5 px-2 flex justify-between border-b border-[#293342] mb-3">
+    <header className="py-5 px-20 flex justify-between border-b border-[#293342] items-center">
       <p className="text-mainText font-bold text-xl flex-1">Prompton Gist</p>
       <div className="flex justify-end flex-1 gap-3">
         <input
