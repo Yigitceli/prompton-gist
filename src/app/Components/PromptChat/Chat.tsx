@@ -9,7 +9,7 @@ function Chat() {
       <div className="h-full flex flex-col">
         <div className="h-full">
           <div className="flex flex-col text-sm">
-            <div>
+            <div className="flex items-end flex-col">
               <p className="text-white">You: </p>
               <p className="text-white pl-6">
                 Find 10 Most Popular Milk Chocolate brands in california

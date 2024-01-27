@@ -7,8 +7,8 @@ function Context() {
       <div className="flex gap-2 items-center">
         <span>30</span>
 
-        <div className="w-72 bg-secondaryText rounded-full h-2">
-          <div className="bg-white h-2 rounded-full w-[25%]"></div>
+        <div className="w-72 bg-secondaryText rounded-full h-1">
+          <div className="bg-white h-1 rounded-full w-[25%]"></div>
         </div>
 
         <span>1280</span>
