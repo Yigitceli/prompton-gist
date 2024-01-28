@@ -17,9 +17,11 @@ function Prompt() {
   );
   const [inputValue, setInputValue] = useState<string>("");
   
-  if(!prompState?.name) {
-    router.push('/')
-  }
+  useEffect(() => {
+    if(!prompState.name){
+      router.push('/')
+    }
+  }, [router, prompState])
 
   return (
     <div className="h-full flex flex-col px-3 lg:px-20">
