@@ -27,3 +27,22 @@ export interface IModelAssistant {
   CurrentContextWindowAssistant: number;
   messages: IMessage[];
 }
+
+export interface IChoice {
+  message: IMessage;
+  index: number;
+  finish_reason: string;
+}
+
+export interface IAPIResponse {
+  choices: IChoice[];
+  created: number;
+  id: string;
+  model: string;
+  object: string;
+  usage: {
+    total_tokens: number;
+    prompt_tokens: number;
+    completion_tokens: number;
+  }
+}

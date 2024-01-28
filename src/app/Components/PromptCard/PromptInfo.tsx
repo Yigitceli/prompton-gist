@@ -17,7 +17,7 @@ function PromptInfo({
   return (
     <div className="flex justify-end gap-5 flex-1 text-secondaryText text-sm">
       <p>
-        Uses {ModelAssistant1} and {ModelAssistant2}
+        Uses {ModelAssistant1.toUpperCase()} and {ModelAssistant2.toUpperCase()}
       </p>
       <p>{messages?.length || 0} comments</p>
       <p>{rating} stars</p>
