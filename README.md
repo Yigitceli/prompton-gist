@@ -1,4 +1,4 @@
-# prompton-gist
+# Prompton-Gist
 
 ## Introduction
 
