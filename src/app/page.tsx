@@ -1,11 +1,10 @@
-'use client'
+"use client"
 
 import React, { useEffect } from "react";
 import RootLayout from "./layout";
 import CategoryButton from "./Components/CategoryButton/CategoryButton";
 import PromptCard from "./Components/PromptCard/PromptCard";
 import { placeholderPrompts } from "./constants";
-import { useRouter } from "next/navigation";
 
 function AllGists() {
 
