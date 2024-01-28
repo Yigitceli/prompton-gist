@@ -96,6 +96,7 @@ function PromptCard({
         projectName,
       })
     );
+    router.push('/prompt')
     setIsLoading(false);
   };
 

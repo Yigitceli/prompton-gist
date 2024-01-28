@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-mainBg p-0 m-0 h-full overflow-hidden max-h-screen3">
+    <html lang="en" className="bg-mainBg p-0 m-0 h-full overflow-hidden">
       <body className="bg-mainBg flex flex-col h-full">
         <NavBar />
         <ReduxProvider>{children}</ReduxProvider>
