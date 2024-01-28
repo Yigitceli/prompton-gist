@@ -82,7 +82,7 @@ function Chat({
       <p className="hidden tablet:inline text-buttonBG text-center md:text-left font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
         {prompt.name}
       </p>
-      <div className="h-full flex-col flex text-xs justify-between overflow-auto">
+      <div className="h-full flex-col flex text-xs overflow-auto">
         {prompt.messages.map((message) => {
           if (message.role === promptRoles.USER) {
             return (
