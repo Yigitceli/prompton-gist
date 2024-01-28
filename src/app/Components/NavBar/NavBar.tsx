@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 function NavBar() {
   const router = useRouter();
   return (
-    <header className="py-5 px-3 md:px-20 flex flex-col gap-2 sm:flex-row sm:gap-0 justify-between border-b border-[#293342] items-center">
-      <p className="text-mainText font-bold text-xl">Prompton Gist</p>
+    <header className="text-sm py-1 md:py-5 px-3 md:px-20 flex flex-col gap-2 sm:flex-row sm:gap-0 justify-between border-b border-[#293342] items-center">
+      <p className="text-mainText font-bold md:text-xl">Prompton Gist</p>
       <div className="flex justify-end flex-1 w-full gap-3 flex-col sm:flex-row">
         <input
           className="bg-secondBg border border-[#293342] py-1 px-3 rounded-sm text-secondaryText w-full sm:w-fit"

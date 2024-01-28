@@ -78,33 +78,33 @@ function Chat({
   };
 
   return (
-    <div className="flex-1 bg-secondBg w-full p-[20px] flex flex-col">
-      <p className="text-buttonBG font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
+    <div className="flex-1 bg-secondBg w-full p-2 md:p-[20px] flex flex-col">
+      <p className="text-buttonBG text-center md:text-left font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
         {prompt.name}
       </p>
       <div className="h-full flex flex-col text-sm">
-        <div className="h-full max-h-[65vh] overflow-auto">
+        <div className="h-full max-h-[61vh]  md:max-h-[65vh] overflow-auto">
           {prompt.messages.map((message) => {
             if (message.role === promptRoles.USER) {
               return (
-                <div className="flex items-end flex-col gap-1" key={message.id}>
-                  <p className="text-white">You: </p>
-                  <p className="text-white pr-6">{message.content}</p>
+                <div className="flex text-right items-end flex-col gap-1 my-2.5" key={message.id}>
+                  <p className="text-white font-bold">You: </p>
+                  <p className="text-white pr-4 md:pr-6">{message.content}</p>
                 </div>
               );
             } else {
               return (
-                <div className="flex flex-col gap-1" key={message.id}>
-                  <p className="text-white">{prompt.name}:</p>
-                  <p className="text-white pl-6">{message.content}</p>
+                <div className="flex text-left flex-col gap-1 my-2.5" key={message.id}>
+                  <p className="text-white font-bold">{prompt.name}:</p>
+                  <p className="text-white pl-4 md:pl-6">{message.content}</p>
                 </div>
               );
             }
           })}
           {isLoading && (
-            <div className="flex flex-col gap-1 mt-1">
+            <div className="flex text-left flex-col gap-1 mt-1">
               <p className="text-white">{prompt.name}:</p>
-              <div className="flex gap-2 pl-6">
+              <div className="flex gap-2 pl-4 md:pl-6">
                 <div className="w-2 h-2 rounded-full animate-pulse bg-buttonBG"></div>
                 <div className="w-2 h-2 rounded-full animate-pulse bg-buttonBG"></div>
                 <div className="w-2 h-2 rounded-full animate-pulse bg-buttonBG"></div>

@@ -12,8 +12,8 @@ function Context({prompt}: IProps) {
   const percentageFilled = useMemo(() => Math.floor((prompt.CurrentContextWindowAssistant / prompt.MaxContextWindowAssistant) * 100) ,[prompt])
 
   return (
-    <div className="text-white flex flex-col gap-1 items-center text-sm py-4">
-      <p>Filled Context Window</p>
+    <div className="text-white flex flex-col gap-1 items-center text-sm py-2 md:py-4">
+      <p className="font-bold">Filled Context Window</p>
       <div className="flex gap-2 items-center">
         <span>{prompt.CurrentContextWindowAssistant}</span>
 

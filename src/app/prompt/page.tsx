@@ -1,18 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import PromptChat from "../Components/PromptChat/PromptChat";
 import { useAppSelector } from "@/lib/store";
+import ModelSwitch from "./ModelSwitch";
+import { IModelAssistant } from "@/types";
 
 function Prompt() {
   const prompState = useAppSelector((state) => state.promptReducer.value);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [activeModel, setActiveModel] = useState<IModelAssistant>(
+    prompState.ModelAssistant1
+  );
 
   const [inputValue, setInputValue] = useState<string>("");
 
   return (
-    <div className="h-full flex flex-col px-20">
-      <div className="flex gap-2 h-full flex-1">
+    <div className="h-full flex flex-col px-3 lg:px-20">
+      <ModelSwitch
+        models={[prompState.ModelAssistant1, prompState.ModelAssistant2]}
+        activeModel={activeModel}
+        setActiveModel={setActiveModel}
+      />
+      <div className="md:flex gap-2 h-full flex-1 hidden">
         <PromptChat
           inputValue={inputValue}
           setInputValue={setInputValue}
@@ -24,6 +34,15 @@ function Prompt() {
           inputValue={inputValue}
           setInputValue={setInputValue}
           prompt={prompState.ModelAssistant2}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+        />
+      </div>
+      <div className="md:hidden h-full">
+        <PromptChat
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          prompt={activeModel.name === prompState.ModelAssistant1.name ? prompState.ModelAssistant1 : prompState.ModelAssistant2}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
         />
