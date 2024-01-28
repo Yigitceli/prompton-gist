@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import React from "react";
@@ -41,7 +41,13 @@ function Prompt({
   defaultPrompt,
   createdTime,
 }: IPromptProps) {
-  const router = useRouter()
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    router.push("/prompt");
+  };
+
   return (
     <div className="bg-secondBg p-5 flex flex-col justify-between min-h-36 gap-3">
       <div className="flex justify-between items-center">
@@ -57,10 +63,12 @@ function Prompt({
           rating={rating}
         />
       </div>
-      <PromptField defaultPrompt={defaultPrompt} />
-      <div className="text-buttonBG font-bold text-md flex justify-end">
-        <button onClick={() => {router.push('/prompt')}}>View {projectName}</button>
-      </div>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+        <PromptField defaultPrompt={defaultPrompt} />
+        <div className="text-buttonBG font-bold text-md flex justify-end">
+          <button type="submit">View {projectName}</button>
+        </div>
+      </form>
     </div>
   );
 }

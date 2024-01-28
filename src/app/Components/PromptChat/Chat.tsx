@@ -11,7 +11,7 @@ function Chat() {
           <div className="flex flex-col text-sm">
             <div className="flex items-end flex-col">
               <p className="text-white">You: </p>
-              <p className="text-white pl-6">
+              <p className="text-white pr-6">
                 Find 10 Most Popular Milk Chocolate brands in california
               </p>
             </div>
