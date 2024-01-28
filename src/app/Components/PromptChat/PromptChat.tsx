@@ -15,7 +15,7 @@ interface IProps {
 function PromptChat({ prompt, inputValue, setInputValue, isLoading, setIsLoading }: IProps) {
 
   return (
-    <div className="flex-1 justify-center flex flex-col items-center h-full pb-2">
+    <div className="flex-1 justify-start flex flex-col items-center h-full pb-2 overflow-hidden">
       <Context prompt={prompt} />
       <Chat
         setIsLoading={setIsLoading}

@@ -97,7 +97,6 @@ function PromptCard({
       })
     );
     setIsLoading(false);
-    router.push("/prompt");
   };
 
   return (

@@ -22,7 +22,7 @@ function Prompt() {
         activeModel={activeModel}
         setActiveModel={setActiveModel}
       />
-      <div className="md:flex gap-2 h-full flex-1 hidden">
+      <div className="tablet:flex gap-2 h-full flex-1 hidden">
         <PromptChat
           inputValue={inputValue}
           setInputValue={setInputValue}
@@ -38,7 +38,7 @@ function Prompt() {
           isLoading={isLoading}
         />
       </div>
-      <div className="md:hidden h-full">
+      <div className="tablet:hidden h-full">
         <PromptChat
           inputValue={inputValue}
           setInputValue={setInputValue}
