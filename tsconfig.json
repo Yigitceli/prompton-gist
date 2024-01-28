@@ -10,6 +10,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["@testing-library/jest-dom"],
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
