@@ -11,7 +11,7 @@ interface IProps {
 
 function PromptChat({prompt, inputValue, setInputValue}: IProps) {
   return (
-    <div className='flex-1 justify-center flex flex-col items-center h-full'>
+    <div className='flex-1 justify-center flex flex-col items-center h-full pb-2'>
         <Context prompt={prompt}/>
         <Chat prompt={prompt} inputValue={inputValue} setInputValue={setInputValue}/>
     </div>

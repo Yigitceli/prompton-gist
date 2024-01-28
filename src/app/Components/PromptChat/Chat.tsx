@@ -13,7 +13,7 @@ interface IProps {
 
 function Chat({ prompt, setInputValue, inputValue }: IProps) {
   return (
-    <div className="flex-1 h-full bg-secondBg w-full p-[20px] flex flex-col">
+    <div className="flex-1 bg-secondBg w-full p-[20px] flex flex-col">
       <p className="text-buttonBG font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
         {prompt.name}
       </p>
