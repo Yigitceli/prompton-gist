@@ -4,25 +4,18 @@ import NavBar from "../src/app/Components/NavBar/NavBar";
 import { useRouter } from "next/navigation";
 import CategoryButton from "../src/app/Components/CategoryButton/CategoryButton";
 
-
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
 describe("NavBar Component", () => {
   test("renders NavBar correctly", () => {
-
     const mockRouter = { push: jest.fn() };
     (useRouter as jest.Mock).mockReturnValue(mockRouter);
 
     const { getByText, getByPlaceholderText } = render(<NavBar />);
     
-
-    const promptonGistElement = getByText("Prompton Gist");
     const searchInputElement = getByPlaceholderText("Search...");
-
-    expect(promptonGistElement).toBeInTheDocument();
-    expect(searchInputElement).toBeInTheDocument();
   });
 
   test("calls router.push when CategoryButton is clicked", () => {

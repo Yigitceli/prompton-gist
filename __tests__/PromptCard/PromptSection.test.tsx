@@ -14,7 +14,6 @@ describe("ProfileSection Component", () => {
       <ProfileSection {...sampleProps} />
     );
 
-
     const nameAndProjectElement = getByText("John Doe / Sample Project");
     const createdTimeElement = getByText("Created 2022-01-01");
 

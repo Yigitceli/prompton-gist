@@ -3,7 +3,6 @@ export interface IMessage {
   role: string;
   content: string;
 }
-
 export interface IPrompt {
   name: string;
   description: string;
