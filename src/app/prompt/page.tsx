@@ -1,17 +1,22 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PromptChat from "../Components/PromptChat/PromptChat";
 import { useAppSelector } from "@/lib/store";
 import ModelSwitch from "./ModelSwitch";
 import { IModelAssistant } from "@/types";
+import { useRouter } from "next/navigation";
 
 function Prompt() {
   const prompState = useAppSelector((state) => state.promptReducer.value);
+  
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeModel, setActiveModel] = useState<IModelAssistant>(
     prompState.ModelAssistant1
   );
+  
+  const router = useRouter()
+  if(!prompState.name) router.push('/')
 
   const [inputValue, setInputValue] = useState<string>("");
 
