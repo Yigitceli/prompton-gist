@@ -35,3 +35,9 @@ export const placeholderPrompts: IPrompt[] = [
     createdTime: "1 hour ago",
   },
 ];
+
+
+export const promptRoles = {
+  USER: 'user',
+  ASSISTANT: 'assistant'
+}
