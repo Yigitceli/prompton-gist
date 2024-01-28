@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./Components/NavBar/NavBar";
+import { ReduxProvider } from "@/lib/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className="bg-mainBg p-0 m-0 h-full">
       <body className="bg-mainBg flex flex-col h-full">
         <NavBar />
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );

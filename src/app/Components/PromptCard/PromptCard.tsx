@@ -6,28 +6,10 @@ import ProfileSection from "./ProfileSection";
 import PromptInfo from "./PromptInfo";
 import PromptField from "./PromptField";
 import { useRouter } from "next/navigation";
-
-export interface IMessage {
-  role: string;
-  content: string;
-}
-
-export interface IPromptProps {
-  name: string;
-  description: string;
-  projectName: string;
-  isPublic: boolean;
-  messages: IMessage[];
-  MaxContextWindowAssistant1: number;
-  MaxContextWindowAssistant2: number;
-  ModelAssistant1: string;
-  ModelAsssistant2: string;
-  CurrentContextWindowAssistant1: number;
-  CurrentContextWindowAssistant2: number;
-  rating: number;
-  defaultPrompt: string;
-  createdTime: string;
-}
+import { IPrompt } from "@/types";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/store";
+import { setPrompt } from "@/lib/features/promptSlice";
 
 function Prompt({
   name,
@@ -40,11 +22,28 @@ function Prompt({
   rating,
   defaultPrompt,
   createdTime,
-}: IPromptProps) {
+}: IPrompt) {
   const router = useRouter();
+  const dispath = useDispatch<AppDispatch>()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    dispath(setPrompt({
+      ModelAssistant1: {
+        name: ModelAssistant1,
+        CurrentContextWindowAssistant: 0,
+        MaxContextWindowAssistant: 0,
+        messages: []
+      },
+      ModelAsssistant2: {
+        name: ModelAsssistant2,
+        CurrentContextWindowAssistant: 0,
+        MaxContextWindowAssistant: 0,
+        messages: []
+      },
+      name,
+      projectName
+    }))
     router.push("/prompt");
   };
 

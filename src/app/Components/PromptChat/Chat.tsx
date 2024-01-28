@@ -1,10 +1,20 @@
+'use client'
+
+import { useAppSelector } from "@/lib/store";
+import { IModelAssistant } from "@/types";
 import React from "react";
 
-function Chat() {
+interface IProps {
+  prompt: IModelAssistant,
+  inputValue: string,
+  setInputValue: (value: string) => void;
+}
+
+function Chat({prompt, setInputValue, inputValue}: IProps) {
   return (
     <div className="flex-1 h-full bg-secondBg w-full p-[20px] flex flex-col">
       <p className="text-buttonBG font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
-        Chat GPT 3.5 Turbo
+        {prompt.name}
       </p>
       <div className="h-full flex flex-col">
         <div className="h-full">
@@ -29,6 +39,8 @@ function Chat() {
             type="text"
             name="question"
             id="question"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
           />
         </div>
       </div>

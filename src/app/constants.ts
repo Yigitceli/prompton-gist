@@ -1,6 +1,6 @@
-import { IPromptProps } from "./Components/PromptCard/PromptCard";
+import { IPrompt } from "@/types";
 
-export const placeholderPrompts: IPromptProps[] = [
+export const placeholderPrompts: IPrompt[] = [
   {
     name: "choco-bot",
     projectName: "Milk Chocolate Brand Finder",

@@ -1,5 +1,5 @@
+import { IMessage } from "@/types";
 import React from "react";
-import { IMessage } from "./PromptCard";
 
 interface IProps {
   messages: IMessage[];
