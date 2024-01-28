@@ -13,10 +13,12 @@ function ModelSwitch({ models, activeModel, setActiveModel }: IProps) {
       {models.map((model) => {
         return (
           <button
+            key={model.name}
             onClick={() => setActiveModel(model)}
             className="flex-1 flex items-center justify-center p-[7px] md:text-base text-xs"
             style={{
-                backgroundColor: model.name === activeModel.name ? '#39495E' : '#1f2937'
+              backgroundColor:
+                model.name === activeModel.name ? "#39495E" : "#1f2937",
             }}
           >
             {model.name}
