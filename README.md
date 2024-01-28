@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# prompton-gist
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This project contains the prompton-gist application, designed for [brief description and purpose].
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Open the terminal in the project directory.
+2. Run the `yarn` command to install dependencies.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- For development mode: `yarn dev`
+- For production build: `yarn build`
+- To start the application in production mode: `yarn start`
+- To check code with ESLint: `yarn lint`
+- To run tests with Jest: `yarn test`
+- To run tests in CI mode with Jest: `yarn test:ci`
 
-## Learn More
+## Requirements
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js and npm should be installed.
+- Dependencies should be installed. (You can install them with `yarn`)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies and Libraries Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Axios](https://axios-http.com/)
+- [MSW (Mock Service Worker)](https://mswjs.io/)
+- Check `package.json` for other dependencies.
