@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Context from './Context'
 import Chat from './Chat'
 import { IModelAssistant } from '@/types'
@@ -10,10 +10,12 @@ interface IProps {
 }
 
 function PromptChat({prompt, inputValue, setInputValue}: IProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   return (
     <div className='flex-1 justify-center flex flex-col items-center h-full pb-2'>
         <Context prompt={prompt}/>
-        <Chat prompt={prompt} inputValue={inputValue} setInputValue={setInputValue}/>
+        <Chat setIsLoading={setIsLoading} prompt={prompt} inputValue={inputValue} setInputValue={setInputValue}/>
     </div>
   )
 }

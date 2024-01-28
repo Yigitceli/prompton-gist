@@ -1,5 +1,5 @@
 export interface IMessage {
-  id: string;
+  id?: string;
   role: string;
   content: string;
 }
@@ -13,7 +13,7 @@ export interface IPrompt {
   MaxContextWindowAssistant1: number;
   MaxContextWindowAssistant2: number;
   ModelAssistant1: string;
-  ModelAsssistant2: string;
+  ModelAssistant2: string;
   CurrentContextWindowAssistant1: number;
   CurrentContextWindowAssistant2: number;
   rating: number;
@@ -44,5 +44,5 @@ export interface IAPIResponse {
     total_tokens: number;
     prompt_tokens: number;
     completion_tokens: number;
-  }
+  };
 }

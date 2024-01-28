@@ -1,49 +1,98 @@
-import { IMessage, IModelAssistant } from "@/types";
+import { IAPIResponse, IMessage, IModelAssistant } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IPromptState {
-    ModelAssistant1: IModelAssistant,
-    ModelAsssistant2: IModelAssistant,
-    name: string,
-    projectName: string,
+  ModelAssistant1: IModelAssistant;
+  ModelAssistant2: IModelAssistant;
+  name: string;
+  projectName: string;
+}
+
+interface IAddMessagePayload {
+  model: string;
+  message: IMessage;
 }
 
 interface IInitialState {
-    value: IPromptState
+  value: IPromptState;
 }
 
 const initialState = {
-    value: {
-        ModelAssistant1: {
-            name: '',
-            CurrentContextWindowAssistant: 0,
-            messages: [],
-            MaxContextWindowAssistant: 0
-        },
-        ModelAsssistant2: {
-            name: '',
-            CurrentContextWindowAssistant: 0,
-            messages: [],
-            MaxContextWindowAssistant: 0
-        },
-        name: '',
-        projectName: '',
-    }
-} as IInitialState
+  value: {
+    ModelAssistant1: {
+      name: "",
+      CurrentContextWindowAssistant: 0,
+      messages: [],
+      MaxContextWindowAssistant: 0,
+    },
+    ModelAssistant2: {
+      name: "",
+      CurrentContextWindowAssistant: 0,
+      messages: [],
+      MaxContextWindowAssistant: 0,
+    },
+    name: "",
+    projectName: "",
+  },
+} as IInitialState;
 
 export const prompt = createSlice({
-    name: 'prompt',
-    initialState,
-    reducers: {
-        setPrompt: (state, action: PayloadAction<IPromptState>) => {
-             return {
-                value: {
-                    ...action.payload
-                }
-             }
-        }
-    }
-})
+  name: "prompt",
+  initialState,
+  reducers: {
+    setPrompt: (state, action: PayloadAction<IPromptState>) => {
+      return {
+        value: {
+          ...action.payload,
+        },
+      };
+    },
+    addPromptMessage: (state, action: PayloadAction<IMessage>) => {
+      return {
+        value: {
+          ModelAssistant1: {
+            ...state.value.ModelAssistant1,
+            messages: [...state.value.ModelAssistant1.messages, action.payload],
+          },
+          ModelAssistant2: {
+            ...state.value.ModelAssistant2,
+            messages: [...state.value.ModelAssistant2.messages, action.payload],
+          },
+          name: state.value.name,
+          projectName: state.value.projectName,
+        },
+      };
+    },
+    recieveMessage: (state, action: PayloadAction<IAPIResponse[]>) => {
+      const ModelAssistant1Messages = action.payload.find((res) =>
+        res.model.includes(state.value.ModelAssistant1.name.toLowerCase())
+      )!.choices[0].message;
+      const ModelAssistant2Messages = action.payload.find((res) =>
+        res.model.includes(state.value.ModelAssistant2.name.toLowerCase())
+      )!.choices[0].message;
+      return {
+        value: {
+          name: state.value.name,
+          projectName: state.value.projectName,
+          ModelAssistant1: {
+            ...state.value.ModelAssistant1,
+            messages: [
+              ...state.value.ModelAssistant1.messages,
+              ModelAssistant1Messages,
+            ],
+          },
+          ModelAssistant2: {
+            ...state.value.ModelAssistant2,
+            messages: [
+              ...state.value.ModelAssistant2.messages,
+              ModelAssistant2Messages,
+            ],
+          },
+        },
+      };
+    },
+  },
+});
 
-export const {setPrompt} = prompt.actions
-export default prompt.reducer
+export const { setPrompt, addPromptMessage, recieveMessage } = prompt.actions;
+export default prompt.reducer;

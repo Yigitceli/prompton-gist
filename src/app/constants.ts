@@ -10,7 +10,7 @@ export const placeholderPrompts: IPrompt[] = [
     messages: [],
     defaultPrompt: "Find 10 most popular milk chocolate brands in california",
     ModelAssistant1: "gpt-4",
-    ModelAsssistant2: "gpt-3.5-turbo",
+    ModelAssistant2: "gpt-3.5-turbo",
     CurrentContextWindowAssistant1: 30,
     CurrentContextWindowAssistant2: 34,
     MaxContextWindowAssistant1: 128000,
@@ -27,7 +27,7 @@ export const placeholderPrompts: IPrompt[] = [
     defaultPrompt:
       "Find The Price of a Cup of Coffee in California January 2024",
     ModelAssistant1: "gpt-4",
-    ModelAsssistant2: "gpt-3.5-turbo",
+    ModelAssistant2: "gpt-3.5-turbo",
     CurrentContextWindowAssistant1: 30,
     CurrentContextWindowAssistant2: 34,
     MaxContextWindowAssistant1: 128000,
@@ -36,8 +36,7 @@ export const placeholderPrompts: IPrompt[] = [
   },
 ];
 
-
 export const promptRoles = {
-  USER: 'user',
-  ASSISTANT: 'assistant'
-}
+  USER: "user",
+  ASSISTANT: "assistant",
+};

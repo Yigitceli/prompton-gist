@@ -20,7 +20,7 @@ function PromptCard({
   isPublic,
   messages,
   ModelAssistant1,
-  ModelAsssistant2,
+  ModelAssistant2,
   rating,
   defaultPrompt,
   createdTime,
@@ -47,15 +47,15 @@ function PromptCard({
       messages: [{ role: "user", content: message }],
     };
 
-    const response = await axios.post(url, data, { headers: headers }) as any;
-    return response.data.choices[0]?.message
+    const response = (await axios.post(url, data, { headers: headers })) as any;
+    return response.data.choices[0]?.message;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     const messagesModelAssistant1 = await sendMessage(value, ModelAssistant1);
-    const messagesModelAssistant2 = await sendMessage(value, ModelAsssistant2);
+    const messagesModelAssistant2 = await sendMessage(value, ModelAssistant2);
     dispath(
       setPrompt({
         ModelAssistant1: {
@@ -68,11 +68,11 @@ function PromptCard({
               role: promptRoles.USER,
               content: value,
             },
-            messagesModelAssistant1
+            messagesModelAssistant1,
           ],
         },
-        ModelAsssistant2: {
-          name: ModelAsssistant2.toUpperCase(),
+        ModelAssistant2: {
+          name: ModelAssistant2.toUpperCase(),
           CurrentContextWindowAssistant: CurrentContextWindowAssistant2,
           MaxContextWindowAssistant: MaxContextWindowAssistant2,
           messages: [
@@ -81,7 +81,7 @@ function PromptCard({
               role: promptRoles.USER,
               content: value,
             },
-            messagesModelAssistant2
+            messagesModelAssistant2,
           ],
         },
         name,
@@ -103,7 +103,7 @@ function PromptCard({
         <PromptInfo
           messages={messages}
           ModelAssistant1={ModelAssistant1}
-          ModelAssistant2={ModelAsssistant2}
+          ModelAssistant2={ModelAssistant2}
           rating={rating}
         />
       </div>
