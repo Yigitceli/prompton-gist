@@ -101,9 +101,9 @@ function PromptCard({
   };
 
   return (
-    <div className="bg-secondBg p-5 flex flex-col justify-between min-h-36 gap-3">
+    <div className="bg-secondBg md:p-5 p-2 flex flex-col justify-between min-h-36 gap-3">
       {isLoading && <Loading />}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center md:flex-row flex-col gap-3 md:gap-0">
         <ProfileSection
           name={name}
           projectName={projectName}
@@ -118,7 +118,7 @@ function PromptCard({
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <PromptField value={value} setValue={setValue} />
-        <div className="text-buttonBG font-bold text-md flex justify-end">
+        <div className="text-buttonBG font-bold text-md flex justify-center md:justify-end">
           <button type="submit">View {projectName}</button>
         </div>
       </form>

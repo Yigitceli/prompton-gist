@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-mainBg p-0 m-0 h-full">
-      <body className="bg-mainBg flex flex-col h-full">
+      <body className="bg-mainBg flex flex-col h-full overflow-hidden">
         <NavBar />
         <ReduxProvider>{children}</ReduxProvider>
       </body>

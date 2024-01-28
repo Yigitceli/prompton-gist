@@ -83,7 +83,7 @@ function Chat({
         {prompt.name}
       </p>
       <div className="h-full flex flex-col text-sm">
-        <div className="h-full overflow-auto">
+        <div className="h-full max-h-[65vh] overflow-auto">
           {prompt.messages.map((message) => {
             if (message.role === promptRoles.USER) {
               return (
