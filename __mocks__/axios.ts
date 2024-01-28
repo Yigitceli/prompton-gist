@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 // Axios'u doğrudan mockla
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const mockAxios = jest.createMockFromModule('axios') as jest.Mocked<typeof axios>;
 
 // Axios post metodunu güncelle ve doğru tiplemeleri sağla
 mockAxios.post.mockResolvedValueOnce({
