@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import ProfileSection from "./ProfileSection";
 import PromptInfo from "./PromptInfo";
 import PromptField from "./PromptField";
@@ -10,8 +10,10 @@ import { IPrompt } from "@/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import { setPrompt } from "@/lib/features/promptSlice";
+import { promptRoles } from "@/app/constants";
+import { randomUUID } from "crypto";
 
-function Prompt({
+function PromptCard({
   name,
   description,
   projectName,
@@ -22,28 +24,43 @@ function Prompt({
   rating,
   defaultPrompt,
   createdTime,
+  CurrentContextWindowAssistant1,
+  CurrentContextWindowAssistant2,
+  MaxContextWindowAssistant1,
+  MaxContextWindowAssistant2,
 }: IPrompt) {
   const router = useRouter();
-  const dispath = useDispatch<AppDispatch>()
+  const dispath = useDispatch<AppDispatch>();
+  const [value, setValue] = useState<string>(defaultPrompt)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispath(setPrompt({
-      ModelAssistant1: {
-        name: ModelAssistant1,
-        CurrentContextWindowAssistant: 0,
-        MaxContextWindowAssistant: 0,
-        messages: []
-      },
-      ModelAsssistant2: {
-        name: ModelAsssistant2,
-        CurrentContextWindowAssistant: 0,
-        MaxContextWindowAssistant: 0,
-        messages: []
-      },
-      name,
-      projectName
-    }))
+    e.preventDefault();
+    dispath(
+      setPrompt({
+        ModelAssistant1: {
+          name: ModelAssistant1,
+          CurrentContextWindowAssistant: CurrentContextWindowAssistant1,
+          MaxContextWindowAssistant: MaxContextWindowAssistant1,
+          messages: [{
+            id: new Date().toISOString(),
+            role: promptRoles.USER,
+            content: value
+          }],
+        },
+        ModelAsssistant2: {
+          name: ModelAsssistant2,
+          CurrentContextWindowAssistant: CurrentContextWindowAssistant2,
+          MaxContextWindowAssistant: MaxContextWindowAssistant2,
+          messages: [{
+            id: new Date().toISOString(),
+            role: promptRoles.USER,
+            content: value
+          }],
+        },
+        name,
+        projectName,
+      })
+    );
     router.push("/prompt");
   };
 
@@ -63,7 +80,7 @@ function Prompt({
         />
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <PromptField defaultPrompt={defaultPrompt} />
+        <PromptField value={value} setValue={setValue}/>
         <div className="text-buttonBG font-bold text-md flex justify-end">
           <button type="submit">View {projectName}</button>
         </div>
@@ -72,4 +89,4 @@ function Prompt({
   );
 }
 
-export default Prompt;
+export default PromptCard;

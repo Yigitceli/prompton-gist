@@ -1,16 +1,17 @@
-'use client'
+"use client";
 
+import { promptRoles } from "@/app/constants";
 import { useAppSelector } from "@/lib/store";
 import { IModelAssistant } from "@/types";
 import React from "react";
 
 interface IProps {
-  prompt: IModelAssistant,
-  inputValue: string,
+  prompt: IModelAssistant;
+  inputValue: string;
   setInputValue: (value: string) => void;
 }
 
-function Chat({prompt, setInputValue, inputValue}: IProps) {
+function Chat({ prompt, setInputValue, inputValue }: IProps) {
   return (
     <div className="flex-1 h-full bg-secondBg w-full p-[20px] flex flex-col">
       <p className="text-buttonBG font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
@@ -18,20 +19,26 @@ function Chat({prompt, setInputValue, inputValue}: IProps) {
       </p>
       <div className="h-full flex flex-col">
         <div className="h-full">
-          <div className="flex flex-col text-sm">
-            <div className="flex items-end flex-col">
-              <p className="text-white">You: </p>
-              <p className="text-white pr-6">
-                Find 10 Most Popular Milk Chocolate brands in california
-              </p>
-            </div>
-            <div>
-              <p className="text-white">LLM:</p>
-              <p className="text-white pl-6">
-                Find 10 Most Popular Milk Chocolate brands in california
-              </p>
-            </div>
-          </div>
+          {prompt.messages.map((message) => {
+            if (message.role === promptRoles.USER) {
+              return (
+                <div className="flex items-end flex-col" key={message.id}>
+                  <p className="text-white">You: </p>
+                  <p className="text-white pr-6">{message.content}</p>
+                </div>
+              );
+            } else {
+              return (
+                <div className="flex flex-col" key={message.id}>
+                  <p className="text-white">LLM:</p>
+                  <p className="text-white pl-6">
+                    {message.content}
+                  </p>
+                </div>
+              );
+            }
+          })}
+          <div className="flex flex-col text-sm"></div>
         </div>
         <div className="flex w-full">
           <input

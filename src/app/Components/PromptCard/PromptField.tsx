@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 interface IProps {
-  defaultPrompt: string;
+  value: string;
+  setValue: (value: string) => void;
 }
 
-function PromptField({ defaultPrompt }: IProps) {
-  const [value, setValue] = useState<string>(defaultPrompt)
+function PromptField({ value, setValue }: IProps) {
   return (
     <input
       className="bg-thirdBg text-buttonBG px-3 py-1"
