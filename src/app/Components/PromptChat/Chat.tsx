@@ -78,11 +78,11 @@ function Chat({
   };
 
   return (
-    <div className="bg-secondBg w-full p-2 md:p-[20px] flex flex-col h-full">
+    <div className="flex-1 bg-secondBg w-full p-2 md:p-[20px] flex flex-col max-h-[70vh] md:max-h-[80vh]">
       <p className="hidden tablet:inline text-buttonBG text-center md:text-left font-bold border-b-[0.5px] mb-2 pb-1 border-secondaryText">
         {prompt.name}
       </p>
-      <div className="h-full flex-col flex text-xs overflow-auto md:text-base">
+      <div className="h-full flex-col flex text-xs justify-between overflow-auto">
         {prompt.messages.map((message) => {
           if (message.role === promptRoles.USER) {
             return (
