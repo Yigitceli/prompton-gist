@@ -12,6 +12,7 @@ import { AppDispatch } from "@/lib/store";
 import { setPrompt } from "@/lib/features/promptSlice";
 import { promptRoles } from "@/app/constants";
 import axios from "axios";
+import Loading from "../Loading/Loading";
 
 function PromptCard({
   name,
@@ -44,23 +45,30 @@ function PromptCard({
     const data = {
       model: model,
       stream: false,
-      messages: [{ role: "user", content: message }],
+      messages: [
+        {
+          role: "user",
+          content: `Context is ${projectName}, so only answer questions related with ${projectName}. Do not answer unrelated questions. Here is the message: ${message}`,
+        },
+      ],
     };
 
     const response = (await axios.post(url, data, { headers: headers })) as any;
-    return response.data.choices[0]?.message;
+    return response.data;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const messagesModelAssistant1 = await sendMessage(value, ModelAssistant1);
-    const messagesModelAssistant2 = await sendMessage(value, ModelAssistant2);
+    const values = await Promise.all([
+      sendMessage(value, ModelAssistant1),
+      sendMessage(value, ModelAssistant2),
+    ]) as IAPIResponse[];
     dispath(
       setPrompt({
         ModelAssistant1: {
           name: ModelAssistant1.toUpperCase(),
-          CurrentContextWindowAssistant: CurrentContextWindowAssistant1,
+          CurrentContextWindowAssistant: values[0].usage.total_tokens,
           MaxContextWindowAssistant: MaxContextWindowAssistant1,
           messages: [
             {
@@ -68,12 +76,12 @@ function PromptCard({
               role: promptRoles.USER,
               content: value,
             },
-            messagesModelAssistant1,
+            values[0].choices[0]?.message,
           ],
         },
         ModelAssistant2: {
           name: ModelAssistant2.toUpperCase(),
-          CurrentContextWindowAssistant: CurrentContextWindowAssistant2,
+          CurrentContextWindowAssistant: values[1].usage.total_tokens,
           MaxContextWindowAssistant: MaxContextWindowAssistant2,
           messages: [
             {
@@ -81,7 +89,7 @@ function PromptCard({
               role: promptRoles.USER,
               content: value,
             },
-            messagesModelAssistant2,
+            values[1].choices[0]?.message,
           ],
         },
         name,
@@ -94,6 +102,7 @@ function PromptCard({
 
   return (
     <div className="bg-secondBg p-5 flex flex-col justify-between min-h-36 gap-3">
+      {isLoading && <Loading />}
       <div className="flex justify-between items-center">
         <ProfileSection
           name={name}

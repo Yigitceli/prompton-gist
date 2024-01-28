@@ -5,7 +5,11 @@ import { AppDispatch, useAppSelector } from "@/lib/store";
 import { IMessage, IModelAssistant } from "@/types";
 import React from "react";
 import axios from "axios";
-import { addPromptMessage, recieveMessage, setPrompt } from "@/lib/features/promptSlice";
+import {
+  addPromptMessage,
+  recieveMessage,
+  setPrompt,
+} from "@/lib/features/promptSlice";
 import { useDispatch } from "react-redux";
 
 interface IProps {
@@ -13,9 +17,16 @@ interface IProps {
   inputValue: string;
   setInputValue: (value: string) => void;
   setIsLoading: (value: boolean) => void;
+  isLoading: boolean;
 }
 
-function Chat({ prompt, setInputValue, inputValue, setIsLoading }: IProps) {
+function Chat({
+  prompt,
+  setInputValue,
+  inputValue,
+  setIsLoading,
+  isLoading,
+}: IProps) {
   const promptState = useAppSelector((state) => state.promptReducer.value);
   const dispath = useDispatch<AppDispatch>();
 
@@ -39,6 +50,10 @@ function Chat({ prompt, setInputValue, inputValue, setIsLoading }: IProps) {
       stream: false,
       messages: [
         ...filteredMessages,
+        {
+          role: promptRoles.USER,
+          content: `Context is ${promptState.projectName}, so only answer questions related with ${promptState.projectName}. Do not answer unrelated questions.`,
+        },
         { role: promptRoles.USER, content: message },
       ],
     };
@@ -50,19 +65,15 @@ function Chat({ prompt, setInputValue, inputValue, setIsLoading }: IProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispath(addPromptMessage({role: promptRoles.USER, content: inputValue}))
-    setInputValue('')
+    dispath(addPromptMessage({ role: promptRoles.USER, content: inputValue }));
+    setInputValue("");
 
     setIsLoading(true);
-    const modelAssistantResponse1= await sendMessage(
-      inputValue,
-      promptState.ModelAssistant1.name.toLowerCase()
-    );
-    const modelAssistantResponse2 = await sendMessage(
-      inputValue,
-      promptState.ModelAssistant2.name.toLowerCase()
-    );
-    dispath(recieveMessage([modelAssistantResponse1, modelAssistantResponse2]))
+    const values = await Promise.all([
+      sendMessage(inputValue, promptState.ModelAssistant1.name.toLowerCase()),
+      sendMessage(inputValue, promptState.ModelAssistant2.name.toLowerCase()),
+    ]);
+    dispath(recieveMessage([values[0], values[1]]));
     setIsLoading(false);
   };
 
@@ -72,27 +83,37 @@ function Chat({ prompt, setInputValue, inputValue, setIsLoading }: IProps) {
         {prompt.name}
       </p>
       <div className="h-full flex flex-col text-sm">
-        <div className="h-full">
+        <div className="h-full overflow-auto">
           {prompt.messages.map((message) => {
             if (message.role === promptRoles.USER) {
               return (
-                <div className="flex items-end flex-col" key={message.id}>
+                <div className="flex items-end flex-col gap-1" key={message.id}>
                   <p className="text-white">You: </p>
                   <p className="text-white pr-6">{message.content}</p>
                 </div>
               );
             } else {
               return (
-                <div className="flex flex-col" key={message.id}>
+                <div className="flex flex-col gap-1" key={message.id}>
                   <p className="text-white">{prompt.name}:</p>
                   <p className="text-white pl-6">{message.content}</p>
                 </div>
               );
             }
           })}
+          {isLoading && (
+            <div className="flex flex-col gap-1 mt-1">
+              <p className="text-white">{prompt.name}:</p>
+              <div className="flex gap-2 pl-6">
+                <div className="w-2 h-2 rounded-full animate-pulse bg-buttonBG"></div>
+                <div className="w-2 h-2 rounded-full animate-pulse bg-buttonBG"></div>
+                <div className="w-2 h-2 rounded-full animate-pulse bg-buttonBG"></div>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col text-sm"></div>
         </div>
-        <form onSubmit={handleSubmit} className="flex w-full">
+        <form onSubmit={handleSubmit} className="flex w-full py-2">
           <input
             className="bg-secondaryText w-full rounded-sm px-2 text-white"
             type="text"
@@ -100,6 +121,7 @@ function Chat({ prompt, setInputValue, inputValue, setIsLoading }: IProps) {
             id="question"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            disabled={isLoading}
           />
         </form>
       </div>

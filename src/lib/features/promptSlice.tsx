@@ -64,12 +64,12 @@ export const prompt = createSlice({
       };
     },
     recieveMessage: (state, action: PayloadAction<IAPIResponse[]>) => {
-      const ModelAssistant1Messages = action.payload.find((res) =>
+      const ModelAssistant1Response = action.payload.find((res) =>
         res.model.includes(state.value.ModelAssistant1.name.toLowerCase())
-      )!.choices[0].message;
-      const ModelAssistant2Messages = action.payload.find((res) =>
+      );
+      const ModelAssistant2Response = action.payload.find((res) =>
         res.model.includes(state.value.ModelAssistant2.name.toLowerCase())
-      )!.choices[0].message;
+      )
       return {
         value: {
           name: state.value.name,
@@ -78,15 +78,17 @@ export const prompt = createSlice({
             ...state.value.ModelAssistant1,
             messages: [
               ...state.value.ModelAssistant1.messages,
-              ModelAssistant1Messages,
+              ModelAssistant1Response!.choices[0].message,
             ],
+            CurrentContextWindowAssistant: ModelAssistant1Response?.usage.total_tokens!
           },
           ModelAssistant2: {
             ...state.value.ModelAssistant2,
             messages: [
               ...state.value.ModelAssistant2.messages,
-              ModelAssistant2Messages,
+              ModelAssistant2Response!.choices[0].message,
             ],
+            CurrentContextWindowAssistant: ModelAssistant2Response?.usage.total_tokens!
           },
         },
       };

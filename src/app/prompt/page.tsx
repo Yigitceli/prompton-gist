@@ -6,6 +6,7 @@ import { useAppSelector } from "@/lib/store";
 
 function Prompt() {
   const prompState = useAppSelector((state) => state.promptReducer.value);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -16,11 +17,15 @@ function Prompt() {
           inputValue={inputValue}
           setInputValue={setInputValue}
           prompt={prompState.ModelAssistant1}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
         />
         <PromptChat
           inputValue={inputValue}
           setInputValue={setInputValue}
           prompt={prompState.ModelAssistant2}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
         />
       </div>
     </div>

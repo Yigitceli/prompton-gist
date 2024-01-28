@@ -40,3 +40,8 @@ export const promptRoles = {
   USER: "user",
   ASSISTANT: "assistant",
 };
+
+export const modelsMaxContextWindows = {
+  'gpt-4': 128000,
+  'gpt-3.5-turbo': 32000,
+}
