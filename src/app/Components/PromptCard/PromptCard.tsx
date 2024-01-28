@@ -1,8 +1,11 @@
+'use client'
+
 import Image from "next/image";
 import React from "react";
 import ProfileSection from "./ProfileSection";
 import PromptInfo from "./PromptInfo";
 import PromptField from "./PromptField";
+import { useRouter } from "next/navigation";
 
 export interface IMessage {
   role: string;
@@ -36,12 +39,17 @@ function Prompt({
   ModelAsssistant2,
   rating,
   defaultPrompt,
-  createdTime
+  createdTime,
 }: IPromptProps) {
+  const router = useRouter()
   return (
     <div className="bg-secondBg p-5 flex flex-col justify-between min-h-36 gap-3">
       <div className="flex justify-between items-center">
-        <ProfileSection name={name} projectName={projectName} createdTime={createdTime}/>
+        <ProfileSection
+          name={name}
+          projectName={projectName}
+          createdTime={createdTime}
+        />
         <PromptInfo
           messages={messages}
           ModelAssistant1={ModelAssistant1}
@@ -51,7 +59,7 @@ function Prompt({
       </div>
       <PromptField defaultPrompt={defaultPrompt} />
       <div className="text-buttonBG font-bold text-md flex justify-end">
-        <button>View {projectName}</button>
+        <button onClick={() => {router.push('/prompt')}}>View {projectName}</button>
       </div>
     </div>
   );

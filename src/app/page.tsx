@@ -1,5 +1,5 @@
-import Prompt from "./Pages/Prompt";
+import AllGists from "./Components/AllGists";
 
 export default function Home() {
-  return <Prompt />;
+  return <AllGists />;
 }

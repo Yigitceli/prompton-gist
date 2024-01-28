@@ -1,7 +1,11 @@
+'use client'
+
 import React from "react";
 import CategoryButton from "../CategoryButton/CategoryButton";
+import { useRouter } from "next/navigation";
 
 function NavBar() {
+  const router = useRouter()
   return (
     <header className="py-5 px-20 flex justify-between border-b border-[#293342] items-center">
       <p className="text-mainText font-bold text-xl flex-1">Prompton Gist</p>
@@ -13,8 +17,8 @@ function NavBar() {
           id="gist-search"
           placeholder="Search..."
         />
-        <CategoryButton text="All Gists" />
-        <button className="text-secondaryText rounded-sm p-1 px-3">
+        <CategoryButton text="All Gists" onClick={() => router.push('/')}/>
+        <button onClick={() => router.push('/')} className="text-secondaryText rounded-sm p-1 px-3">
           Back to Home
         </button>
       </div>
