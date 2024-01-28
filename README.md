@@ -23,11 +23,28 @@ This project contains the prompton-gist application, designed for [brief descrip
 - Node.js and npm should be installed.
 - Dependencies should be installed. (You can install them with `yarn`)
 
-## Technologies and Libraries Used
+## Design and Architecture Choices
 
-- [Next.js](https://nextjs.org/)
-- [React](https://reactjs.org/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
-- [Axios](https://axios-http.com/)
-- [MSW (Mock Service Worker)](https://mswjs.io/)
-- Check `package.json` for other dependencies.
+### Technology Stack
+
+- **Frontend Framework:** [React](https://reactjs.org/)
+- **State Management:** [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **HTTP Requests:** [Axios](https://axios-http.com/)
+- **Mocking API:** [MSW (Mock Service Worker)](https://mswjs.io/)
+- **Testing:** [Jest](https://jestjs.io/) and [Testing Library](https://testing-library.com/)
+
+### Folder Structure
+
+- **src/components:** Reusable React components.
+- **src/pages:** Next.js pages.
+- **src/redux:** Redux store setup and slices.
+- **src/services:** API services.
+- **src/styles:** Styles and Tailwind CSS configuration.
+- **tests:** Jest and Testing Library tests.
+
+## Assumptions Made During Development
+
+1. **Data Format:** Assumed that the API responses follow a specific format, and error handling is minimal for demonstration purposes.
+2. **Authentication:** Assuming the absence of authentication in this version of the project.
+3. **UI Design:** Basic styling is applied, and further improvements can be made based on specific design requirements.
