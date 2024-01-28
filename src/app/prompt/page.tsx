@@ -14,11 +14,10 @@ function Prompt() {
   const [activeModel, setActiveModel] = useState<IModelAssistant>(
     prompState.ModelAssistant1
   );
+  const [inputValue, setInputValue] = useState<string>("");
   
   const router = useRouter()
   if(!prompState.name) router.push('/')
-
-  const [inputValue, setInputValue] = useState<string>("");
 
   return (
     <div className="h-full flex flex-col px-3 lg:px-20">
