@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 function Prompt() {
   const prompState = useAppSelector((state) => state.promptReducer.value);
+  const router = useRouter()
   
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeModel, setActiveModel] = useState<IModelAssistant>(
@@ -16,7 +17,6 @@ function Prompt() {
   );
   const [inputValue, setInputValue] = useState<string>("");
   
-  const router = useRouter()
   if(!prompState.name) router.push('/')
 
   return (
